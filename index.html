@@ -3,51 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora - Jpedro0joao0</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Minecraft Name Generator - Gerador de Nomes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mine-styles.css">
 </head>
 <body>
+    <div class="minecraft-bg"></div>
+    
     <div class="container">
-        <div class="calculator-wrapper">
+        <div class="wrapper">
             <div class="header">
-                <h1>Calculadora</h1>
-                <p>Modern Tech Design</p>
+                <h1>Minecraft Name Generator</h1>
+                <p>⛏️ Crie nomes épicos para o seu personagem ⛏️</p>
             </div>
-            
-            <div class="calculator">
-                <div class="display">
-                    <input type="text" id="display" placeholder="0" readonly>
+
+            <div class="generator-box">
+                <div class="category-selector">
+                    <button class="category-btn active" onclick="selectCategory('warrior')">⚔️ Guerreiro</button>
+                    <button class="category-btn" onclick="selectCategory('builder')">🏗️ Construtor</button>
+                    <button class="category-btn" onclick="selectCategory('mage')">🔮 Mago</button>
+                    <button class="category-btn" onclick="selectCategory('ranger')">🏹 Arqueiro</button>
+                    <button class="category-btn" onclick="selectCategory('miner')">⛏️ Mineiro</button>
                 </div>
-                
-                <div class="buttons">
-                    <button class="btn btn-clear" onclick="clearDisplay()">C</button>
-                    <button class="btn btn-operator" onclick="appendOperator('/')">/</button>
-                    <button class="btn btn-operator" onclick="appendOperator('*')">×</button>
-                    <button class="btn btn-delete" onclick="deleteLast()">⌫</button>
-                    
-                    <button class="btn" onclick="appendNumber('7')">7</button>
-                    <button class="btn" onclick="appendNumber('8')">8</button>
-                    <button class="btn" onclick="appendNumber('9')">9</button>
-                    <button class="btn btn-operator" onclick="appendOperator('-')">-</button>
-                    
-                    <button class="btn" onclick="appendNumber('4')">4</button>
-                    <button class="btn" onclick="appendNumber('5')">5</button>
-                    <button class="btn" onclick="appendNumber('6')">6</button>
-                    <button class="btn btn-operator" onclick="appendOperator('+')">+</button>
-                    
-                    <button class="btn" onclick="appendNumber('1')">1</button>
-                    <button class="btn" onclick="appendNumber('2')">2</button>
-                    <button class="btn" onclick="appendNumber('3')">3</button>
-                    <button class="btn btn-operator" onclick="appendOperator('%')">%</button>
-                    
-                    <button class="btn btn-zero" onclick="appendNumber('0')">0</button>
-                    <button class="btn" onclick="appendNumber('.')">.</button>
-                    <button class="btn btn-equals" onclick="calculate()">=</button>
+
+                <div class="display-box">
+                    <div class="name-display">
+                        <span id="generated-name">CreeperSlayer</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyName()">📋 Copiar Nome</button>
                 </div>
+
+                <div class="generator-controls">
+                    <label>
+                        <input type="checkbox" id="include-numbers" checked>
+                        Incluir números
+                    </label>
+                    <label>
+                        <input type="checkbox" id="include-underscores" checked>
+                        Incluir underscores
+                    </label>
+                </div>
+
+                <button class="generate-btn" onclick="generateName()">
+                    ✨ Gerar Novo Nome ✨
+                </button>
+
+                <div class="suggestions">
+                    <h3>💡 Sugestões Geradas:</h3>
+                    <div id="suggestions-list" class="suggestions-list"></div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Divirta-se gerando nomes épicos para sua próxima aventura! 🎮</p>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="mine-script.js"></script>
 </body>
 </html>
