@@ -10,11 +10,27 @@
 <body>
     <div class="stars"></div>
     
+    <!-- THEME SWITCHER -->
+    <div class="theme-switcher">
+        <label for="theme-select">🎨 Tema:</label>
+        <select id="theme-select" onchange="switchTheme(this.value)">
+            <option value="purple-dark">Roxo & Preto</option>
+            <option value="blue-dark">Azul & Preto</option>
+            <option value="cyan-dark">Ciano & Preto</option>
+            <option value="pink-dark">Rosa & Preto</option>
+            <option value="green-dark">Verde & Preto</option>
+            <option value="orange-dark">Laranja & Preto</option>
+        </select>
+    </div>
+    
     <div class="container">
         <!-- NAV TABS -->
         <div class="nav-tabs">
             <button class="tab-btn active" onclick="switchTab('converter')">💱 Conversor</button>
             <button class="tab-btn" onclick="switchTab('calculator')">🧮 Calculadora</button>
+            <button class="tab-btn" onclick="switchTab('minecraft')">⛏️ Minecraft</button>
+            <button class="tab-btn" onclick="switchTab('recipes')">🍳 Receitas</button>
+            <button class="tab-btn" onclick="switchTab('jokes')">😂 Piadas</button>
         </div>
 
         <!-- CONVERSOR DE MOEDAS -->
@@ -117,6 +133,78 @@
                         <button class="btn btn-zero" onclick="appendNumber('0')">0</button>
                         <button class="btn" onclick="appendNumber('.')">.</button>
                         <button class="btn btn-equals" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINECRAFT NAME GENERATOR -->
+        <div id="minecraft" class="tab-content">
+            <div class="wrapper">
+                <div class="header">
+                    <h1>⛏️ Gerador de Nomes Minecraft</h1>
+                    <p>Crie nomes épicos para seu personagem</p>
+                </div>
+
+                <div class="generator-box">
+                    <div class="category-selector">
+                        <button class="category-btn active" onclick="selectCategory('warrior')">⚔️ Guerreiro</button>
+                        <button class="category-btn" onclick="selectCategory('builder')">🏗️ Construtor</button>
+                        <button class="category-btn" onclick="selectCategory('mage')">🔮 Mago</button>
+                        <button class="category-btn" onclick="selectCategory('ranger')">🏹 Arqueiro</button>
+                        <button class="category-btn" onclick="selectCategory('miner')">⛏️ Mineiro</button>
+                    </div>
+
+                    <div class="display-box">
+                        <div class="name-display">
+                            <span id="generated-name">CreeperSlayer</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyName()">📋 Copiar Nome</button>
+                    </div>
+
+                    <button class="generate-btn" onclick="generateName()">
+                        ✨ Gerar Novo Nome ✨
+                    </button>
+
+                    <div class="suggestions">
+                        <h3>💡 Sugestões Geradas:</h3>
+                        <div id="suggestions-list" class="suggestions-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RECEITAS -->
+        <div id="recipes" class="tab-content">
+            <div class="wrapper">
+                <div class="header">
+                    <h1>🍳 Receitas Práticas</h1>
+                    <p>Receitas rápidas e deliciosas</p>
+                </div>
+
+                <div class="recipes-box">
+                    <button class="generate-btn" onclick="getRandomRecipe()">🎲 Receita Aleatória</button>
+                    
+                    <div id="recipe-display" class="recipe-display">
+                        <p style="text-align: center; color: rgba(255,255,255,0.6);">Clique no botão para gerar uma receita!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIADAS -->
+        <div id="jokes" class="tab-content">
+            <div class="wrapper">
+                <div class="header">
+                    <h1>😂 Piadas Engraçadas</h1>
+                    <p>Ria um pouco neste momento!</p>
+                </div>
+
+                <div class="jokes-box">
+                    <button class="generate-btn" onclick="getRandomJoke()">😄 Nova Piada</button>
+                    
+                    <div id="joke-display" class="joke-display">
+                        <p style="text-align: center; color: rgba(255,255,255,0.6);">Clique no botão para ler uma piada!</p>
                     </div>
                 </div>
             </div>
