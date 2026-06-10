@@ -3,63 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Name Generator - Gerador de Nomes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="mine-styles.css">
+    <title>Conversor de Moedas & Calculadora Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="minecraft-bg"></div>
+    <div class="stars"></div>
     
     <div class="container">
-        <div class="wrapper">
-            <div class="header">
-                <h1>Minecraft Name Generator</h1>
-                <p>⛏️ Crie nomes épicos para o seu personagem ⛏️</p>
-            </div>
+        <!-- NAV TABS -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('converter')">💱 Conversor</button>
+            <button class="tab-btn" onclick="switchTab('calculator')">🧮 Calculadora</button>
+        </div>
 
-            <div class="generator-box">
-                <div class="category-selector">
-                    <button class="category-btn active" onclick="selectCategory('warrior')">⚔️ Guerreiro</button>
-                    <button class="category-btn" onclick="selectCategory('builder')">🏗️ Construtor</button>
-                    <button class="category-btn" onclick="selectCategory('mage')">🔮 Mago</button>
-                    <button class="category-btn" onclick="selectCategory('ranger')">🏹 Arqueiro</button>
-                    <button class="category-btn" onclick="selectCategory('miner')">⛏️ Mineiro</button>
+        <!-- CONVERSOR DE MOEDAS -->
+        <div id="converter" class="tab-content active">
+            <div class="wrapper">
+                <div class="header">
+                    <h1>💱 Conversor de Moedas Premium</h1>
+                    <p>Conversão em tempo real com as melhores taxas</p>
                 </div>
 
-                <div class="display-box">
-                    <div class="name-display">
-                        <span id="generated-name">CreeperSlayer</span>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>De:</label>
+                        <div class="input-row">
+                            <input type="number" id="amount" placeholder="1000" value="1" min="0">
+                            <select id="from-currency" onchange="updateConversion()">
+                                <option value="USD">USD (Dólar)</option>
+                                <option value="EUR">EUR (Euro)</option>
+                                <option value="GBP">GBP (Libra)</option>
+                                <option value="JPY">JPY (Iene)</option>
+                                <option value="AUD">AUD (Dólar Australiano)</option>
+                                <option value="CAD">CAD (Dólar Canadense)</option>
+                                <option value="CHF">CHF (Franco Suíço)</option>
+                                <option value="CNY">CNY (Yuan Chinês)</option>
+                                <option value="INR">INR (Rúpia Indiana)</option>
+                                <option value="MXN">MXN (Peso Mexicano)</option>
+                            </select>
+                        </div>
                     </div>
-                    <button class="copy-btn" onclick="copyName()">📋 Copiar Nome</button>
-                </div>
 
-                <div class="generator-controls">
-                    <label>
-                        <input type="checkbox" id="include-numbers" checked>
-                        Incluir números
-                    </label>
-                    <label>
-                        <input type="checkbox" id="include-underscores" checked>
-                        Incluir underscores
-                    </label>
-                </div>
+                    <button class="swap-btn" onclick="swapCurrencies()">⇅</button>
 
-                <button class="generate-btn" onclick="generateName()">
-                    ✨ Gerar Novo Nome ✨
-                </button>
+                    <div class="input-group">
+                        <label>Para:</label>
+                        <div class="input-row">
+                            <input type="number" id="result" placeholder="0" readonly>
+                            <select id="to-currency" onchange="updateConversion()">
+                                <option value="USD">USD (Dólar)</option>
+                                <option value="EUR">EUR (Euro)</option>
+                                <option value="GBP">GBP (Libra)</option>
+                                <option value="JPY">JPY (Iene)</option>
+                                <option value="AUD">AUD (Dólar Australiano)</option>
+                                <option value="CAD">CAD (Dólar Canadense)</option>
+                                <option value="CHF">CHF (Franco Suíço)</option>
+                                <option value="CNY">CNY (Yuan Chinês)</option>
+                                <option value="INR">INR (Rúpia Indiana)</option>
+                                <option value="MXN">MXN (Peso Mexicano)</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <div class="suggestions">
-                    <h3>💡 Sugestões Geradas:</h3>
-                    <div id="suggestions-list" class="suggestions-list"></div>
+                    <button class="action-btn" onclick="copyResult()">📋 Copiar Resultado</button>
+                    
+                    <div class="exchange-info">
+                        <p id="exchange-rate">Taxa de câmbio será carregada...</p>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="footer">
-                <p>Divirta-se gerando nomes épicos para sua próxima aventura! 🎮</p>
+        <!-- CALCULADORA -->
+        <div id="calculator" class="tab-content">
+            <div class="wrapper">
+                <div class="header">
+                    <h1>🧮 Calculadora Científica</h1>
+                    <p>Cálculos precisos com interface elegante</p>
+                </div>
+
+                <div class="calculator-wrapper">
+                    <div class="display">
+                        <input type="text" id="display" placeholder="0" readonly>
+                    </div>
+
+                    <div class="buttons">
+                        <!-- Row 1 -->
+                        <button class="btn btn-clear" onclick="clearDisplay()">AC</button>
+                        <button class="btn btn-operator" onclick="appendOperator('/')">÷</button>
+                        <button class="btn btn-operator" onclick="appendOperator('*')">×</button>
+                        <button class="btn btn-delete" onclick="deleteLast()">⌫</button>
+
+                        <!-- Row 2 -->
+                        <button class="btn" onclick="appendNumber('7')">7</button>
+                        <button class="btn" onclick="appendNumber('8')">8</button>
+                        <button class="btn" onclick="appendNumber('9')">9</button>
+                        <button class="btn btn-operator" onclick="appendOperator('-')">−</button>
+
+                        <!-- Row 3 -->
+                        <button class="btn" onclick="appendNumber('4')">4</button>
+                        <button class="btn" onclick="appendNumber('5')">5</button>
+                        <button class="btn" onclick="appendNumber('6')">6</button>
+                        <button class="btn btn-operator" onclick="appendOperator('+')">+</button>
+
+                        <!-- Row 4 -->
+                        <button class="btn" onclick="appendNumber('1')">1</button>
+                        <button class="btn" onclick="appendNumber('2')">2</button>
+                        <button class="btn" onclick="appendNumber('3')">3</button>
+                        <button class="btn btn-operator" onclick="appendOperator('%')">%</button>
+
+                        <!-- Row 5 -->
+                        <button class="btn btn-zero" onclick="appendNumber('0')">0</button>
+                        <button class="btn" onclick="appendNumber('.')">.</button>
+                        <button class="btn btn-equals" onclick="calculate()">=</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="mine-script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
